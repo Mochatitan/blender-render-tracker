@@ -4,7 +4,7 @@
     "slug": "blender-render-tracker",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/defaultcube.png",
+    "icon": "./assets/images/squaredefaultcube.png",
     "scheme": "blenderrendertracker",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
