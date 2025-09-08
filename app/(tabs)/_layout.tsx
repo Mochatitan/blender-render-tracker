@@ -1,7 +1,6 @@
 import { Tabs } from 'expo-router';
-import { Image } from "react-native";
 import React from 'react';
-import { Platform } from 'react-native';
+import { Image, Platform } from "react-native";
 
 import { HapticTab } from '@/components/HapticTab';
 import { IconSymbol } from '@/components/ui/IconSymbol';
@@ -27,16 +26,16 @@ export default function TabLayout() {
         }),
       }}>
       <Tabs.Screen
-        name="tracker"
+        name="index"
         options={{
           title: 'Tracker',
-           tabBarIcon: ({ color, size }) => (
-      <Image
-        source={require('@/assets/images/defaultcube.png')} 
-        style={{ width: size, height: size, tintColor: color }}
-        resizeMode="contain"
-      />
-    ),
+          tabBarIcon: ({ color, size }) => (
+            <Image
+              source={require('@/assets/images/defaultcube.png')}
+              style={{ width: size, height: size, tintColor: color }}
+              resizeMode="contain"
+            />
+          ),
         }}
       />
       <Tabs.Screen

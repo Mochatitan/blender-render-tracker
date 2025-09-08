@@ -1,0 +1,1 @@
+$env:PATH="C:\Users\rossilt\Desktop\nod\nodev20;" + $env:PATH
