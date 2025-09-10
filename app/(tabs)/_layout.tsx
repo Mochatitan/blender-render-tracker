@@ -1,15 +1,15 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { Image, Platform } from "react-native";
+import { Image } from "react-native";
 
 import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const tabColor = 'rgba(255, 84, 84, 1)';
 
   return (
     <Tabs
@@ -18,12 +18,9 @@ export default function TabLayout() {
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            position: 'absolute',
-          },
-          default: {},
-        }),
+        tabBarStyle: {
+          backgroundColor: tabColor,
+        },
       }}>
       <Tabs.Screen
         name="index"
@@ -39,10 +36,42 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="viewer"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: 'Viewer',
+          tabBarIcon: ({ color, size }) => (
+            <Image
+              source={require('@/assets/images/icon.png')}
+              style={{ width: size, height: size, tintColor: color }}
+              resizeMode="contain"
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="downloads"
+        options={{
+          title: 'Downloads',
+          tabBarIcon: ({ color, size }) => (
+            <Image
+              source={require('@/assets/images/downloadicon.png')}
+              style={{ width: size, height: size, tintColor: color }}
+              resizeMode="contain"
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: 'Settings',
+          tabBarIcon: ({ color, size }) => (
+            <Image
+              source={require('@/assets/images/settingsicon.png')}
+              style={{ width: size, height: size, tintColor: color }}
+              resizeMode="contain"
+            />
+          ),
         }}
       />
     </Tabs>
