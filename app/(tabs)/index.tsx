@@ -1,75 +1,89 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { useState } from "react";
+import { StyleSheet, Switch, Text, View } from "react-native";
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+export default function TrackerScreen() {
 
-export default function HomeScreen() {
+    const [notify, setNotify] = useState(false);
+      
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/squaredefaultcube.png')}
-          style={styles.trackerLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this  bad app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <View style={styles.container}>
+      {/* Header */}
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Tracker</Text>
+      </View>
+
+      {/* File Info */}
+      <View style={styles.card}>
+        <Text style={styles.fileName}>Unriggedcat.blend</Text>
+        <Text style={styles.info}>frame: 396 of 2056</Text>
+        <Text style={styles.info}>time left est: 2 hr 30m</Text>
+
+        <View style={styles.row}>
+          <Text style={styles.info}>notify when finished:</Text>
+           <Switch
+            value={notify}
+            onValueChange={setNotify}
+            thumbColor={notify ? "#d17a22" : "#f4f3f4"}
+            trackColor={{ false: "#767577", true: "#d17a22" }}
+          />
+        </View>
+      </View>
+
+      {/* Progress Info */}
+      <View style={styles.card}>
+        <Text style={styles.info}>frames rendered: 396</Text>
+        <Text style={styles.info}>frames remaining: 1660</Text>
+
+        <Text style={styles.info}>est method: ▼ Avg * frames</Text>
+        <Text style={styles.info}>avg frame time: 2m 35s</Text>
+        <Text style={styles.info}>time left est: 2hr 30m</Text>
+        <Text style={styles.info}>EST: 7:46 PM</Text>
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  container: {
+    flex: 1,
+    backgroundColor: "#1a1a1a", // dark bg
+    padding: 20,
+    alignItems: "center",
   },
-  stepContainer: {
-    gap: 2,
-    marginBottom: 8,
+  header: {
+    width: "100%",
+    backgroundColor: "#d17a22",
+    padding: 12,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
   },
-  trackerLogo: {
-    height: 100,
-    width: 100,
-    bottom: 0,
-    left: 15,
-    position: 'absolute',
+  headerText: {
+    color: "white",
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  card: {
+    width: "100%",
+    backgroundColor: "#eee",
+    borderRadius: 10,
+    padding: 15,
+    marginTop: 15,
+  },
+  fileName: {
+    fontSize: 16,
+    fontWeight: "600",
+    textAlign: "center",
+    marginBottom: 10,
+  },
+  info: {
+    fontSize: 14,
+    color: "#333",
+    marginBottom: 5,
+  },
+  row: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
 });
