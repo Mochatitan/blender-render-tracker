@@ -1,8 +1,40 @@
 import { useState } from "react";
 import { StyleSheet, Switch, Text, View } from "react-native";
 
-export default function TrackerScreen() {
 
+    // frontend.js (or within your frontend framework)
+    async function fetchData() {
+        try {
+            const response = await fetch('http://localhost:3001/api/data'); // Replace with your Express server URL
+            const data = await response.json();
+            console.log('Data from Express:', data.message);
+            // Update your UI with the data
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+
+    async function postData() {
+        const dataToSend = { name: 'John Doe', age: 30 };
+        try {
+            const response = await fetch('http://localhost:3001/api/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dataToSend),
+            });
+            const result = await response.json();
+            console.log('Response from Express:', result.message);
+        } catch (error) {
+            console.error('Error posting data:', error);
+        }
+    }
+
+export default function TrackerScreen() {
+        fetchData();
+        postData();
+    
     const [notify, setNotify] = useState(false);
       
   return (
